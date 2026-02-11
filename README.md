@@ -3,10 +3,10 @@
 Todos os meus projetos em um só lugar, em caso de repositorios dedicados o README.md tanto se encontra aqui quanto no repositorio dedicado, e aqui você encontrará um link te redirecionando ao repositorio escolhido
 
 ## Índice
-- [Curso](https://jhonny1307.github.io/curso-de-programação-para-celular)
+- [Curso de Programação Voltado Para Celular](https://jhonny1307.github.io/#curso-de-programação-voltado-para-celular)
 - [MD2PDF](https://jhonny1307.github.io/#md2pdf)
 
-## Curso de programação para celular
+## Curso de Programação Voltado Para Celular
 
 - Em Andamento!
 
