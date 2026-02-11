@@ -44,17 +44,36 @@ font-weight:bold;
 
 <script>
 function baixarPDF() {
-    const element = document.body; // pega a página toda
 
-    html2pdf()
-        .set({
-            margin: 10,
-            filename: 'README.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        })
-        .from(element)
-        .save();
+    // tenta pegar só conteúdo principal
+    let element =
+        document.querySelector("main") ||
+        document.querySelector("article") ||
+        document.body;
+
+    // força remover margens estranhas
+    element.style.marginTop = "0px";
+    element.style.paddingTop = "0px";
+
+    html2pdf().set({
+        margin: [5,5,5,5],
+        filename: "README.pdf",
+        pagebreak: { mode: ["css", "legacy"] },
+
+        image: { type: "jpeg", quality: 1 },
+
+        html2canvas: {
+            scale: 3,
+            scrollY: 0,
+            useCORS: true
+        },
+
+        jsPDF: {
+            unit: "mm",
+            format: "a4",
+            orientation: "portrait"
+        }
+
+    }).from(element).save();
 }
 </script>
