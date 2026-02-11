@@ -2,6 +2,8 @@
 
 - teste 4
 
+![vampeta](https://veja.abril.com.br/wp-content/uploads/2025/07/vampeta-tvpop.jpg?quality=70&strip=info&w=672&h=416&crop=1)
+
 ### Informações Pessoais
 
 Nome: **João Mayer Mendes Cordeiro**\
