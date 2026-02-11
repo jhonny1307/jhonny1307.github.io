@@ -1,61 +1,33 @@
-# Currículo
+# Jhonny projects
 
-![vampeta](https://veja.abril.com.br/wp-content/uploads/2025/07/vampeta-tvpop.jpg?quality=70&strip=info&w=672&h=416&crop=1)
+Todos os meus projetos em um só lugar, em caso de repositorios dedicados o README.md tanto se encontra aqui quanto no repositorio dedicado, e aqui você encontrará um link te redirecionando ao repositorio escolhido
 
-### Za Warudo
+## Índice
+- [md2pdf](https://jhonny1307.github.io/#md2pdf)
 
-### Informações Pessoais
+### md2pdf
 
-Nome: **João Mayer Mendes Cordeiro**\
-Data de nascimento: **13/07/2009**\
-Email: **joao.mayer.m.c@gmail.com**\
-Telefone: **(61) 99415-2099**\
-Situação atual: **Estudante**
+Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão (ele mesmo) e funciona totalmente client-side, utilizando a função ```window.print()```
 
-### Sobre mim
-
-Estudante interessado em tecnologia, programação e criação de projetos digitais. Tenho facilidade para aprender ferramentas novas, resolver problemas e trabalhar com lógica e criatividade. Busco oportunidades para desenvolver experiência prática e crescer profissionalmente.
-
-### Formação
-
-+ Ensino Médio incompleto\
-  Colégio Católica de Brasília\
-  Previsão de conclusão: 2027
-+ Estudo autodidata em programação
-
-### Experiências
-
-**Projetos pessoais em tecnologia**
-- Desenvolvimento e testes de projetos próprios
-- Aprendizado prático de programação e lógica computacional
-- Exploração de ferramentas digitais e criação de conteúdo
-
-<!-- Botão definitivo - quebra de página, nome do PDF, botão invisível no PDF -->
 <style>
-  /* Configurações globais de impressão */
   @media print {
-    /* Esconde o botão e qualquer outro elemento com classe .no-print */
     .no-print, button {
       display: none !important;
     }
     
-    /* Remove margens extras do body e html */
     html, body {
       margin: 0 !important;
       padding: 0 !important;
     }
     
-    /* Quebra de página ANTES de cada h1 e h2 */
     h1, h2 {
       page-break-before: always;
     }
     
-    /* Mas NÃO quebra antes do primeiro h1/h2 (evita página em branco inicial) */
     h1:first-of-type, h2:first-of-type {
       page-break-before: avoid;
     }
     
-    /* Ajustes de espaçamento pra não gerar páginas fantasmas */
     body {
       margin: 1.5cm !important;
     }
@@ -76,24 +48,14 @@ Estudante interessado em tecnologia, programação e criação de projetos digit
 
 <script>
   function gerarPDFPerfeito() {
-    // 1. Salva o título original da página
     const tituloOriginal = document.title;
-    
-    // 2. Define o nome do PDF baseado no primeiro H1 ou no nome da página
     const primeiroH1 = document.querySelector('h1');
     const nomePDF = primeiroH1 
       ? primeiroH1.innerText.trim() 
       : document.title || 'documento';
-    
     document.title = nomePDF;
-    
-    // 3. Remove qualquer classe/estilo que possa causar página extra
-    //    (nada específico, só garantia)
-    
-    // 4. Dispara a impressão com todas as regras CSS aplicadas
     window.print();
     
-    // 5. Restaura o título original (opcional, mas educado)
     setTimeout(() => {
       document.title = tituloOriginal;
     }, 100);
