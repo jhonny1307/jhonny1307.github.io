@@ -28,57 +28,72 @@ Estudante interessado em tecnologia, programação e criação de projetos digit
 - Aprendizado prático de programação e lógica computacional
 - Exploração de ferramentas digitais e criação de conteúdo
 
-<!-- Botão que NUNCA MAIS VAI TE FAZER SOFRER -->
+<!-- Botão definitivo - quebra de página, nome do PDF, botão invisível no PDF -->
 <style>
-  /* Esconde o botão no PDF */
+  /* Configurações globais de impressão */
   @media print {
-    .no-print {
+    /* Esconde o botão e qualquer outro elemento com classe .no-print */
+    .no-print, button {
       display: none !important;
     }
     
-    /* Quebra de página antes de h1 e h2 */
+    /* Remove margens extras do body e html */
+    html, body {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    /* Quebra de página ANTES de cada h1 e h2 */
     h1, h2 {
       page-break-before: always;
     }
     
-    /* Evita quebra no meio de parágrafos ou imagens */
-    p, img, pre, table {
-      page-break-inside: avoid;
+    /* Mas NÃO quebra antes do primeiro h1/h2 (evita página em branco inicial) */
+    h1:first-of-type, h2:first-of-type {
+      page-break-before: avoid;
     }
     
-    /* Ajustes opcionais de margem */
+    /* Ajustes de espaçamento pra não gerar páginas fantasmas */
     body {
-      margin: 1.5cm;
+      margin: 1.5cm !important;
     }
   }
 </style>
 
-<div style="text-align: center; margin: 20px 0;" class="no-print">
-  <button onclick="gerarPDF()" 
-          style="background-color: #4CAF50; color: white; padding: 12px 24px; 
-                 border: none; border-radius: 4px; font-size: 16px; cursor: pointer;
-                 box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
-    🖨️ Salvar como PDF (título, quebras, sem botão)
+<div style="text-align: center; margin: 20px 0;">
+  <button onclick="gerarPDFPerfeito()" 
+          style="background-color: #D32F2F; color: white; padding: 14px 28px; 
+                 border: none; border-radius: 50px; font-size: 18px; cursor: pointer; 
+                 box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s;"
+          class="no-print"
+          onmouseover="this.style.backgroundColor='#B71C1C'"
+          onmouseout="this.style.backgroundColor='#D32F2F'">
+    🧠 GERAR PDF PERFEITO (sério, agora vai)
   </button>
 </div>
 
 <script>
-function gerarPDF() {
-  // 1. Define o título da página como nome sugerido do PDF
-  const titulo = document.title || 'documento';
-  document.title = titulo; // já existe, mas garantimos
-  
-  // 2. (Opcional) Se quiser remover acentos e espaços pro nome do arquivo
-  const nomeArquivo = titulo
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/[^a-zA-Z0-9]/g, '_')
-    .toLowerCase() || 'documento';
-  
-  // 3. Dispara a impressão
-  window.print();
-  
-  // 4. Restaura o título original (se tiver mudado)
-  //    Mas não precisa, porque o título já era esse.
-}
+  function gerarPDFPerfeito() {
+    // 1. Salva o título original da página
+    const tituloOriginal = document.title;
+    
+    // 2. Define o nome do PDF baseado no primeiro H1 ou no nome da página
+    const primeiroH1 = document.querySelector('h1');
+    const nomePDF = primeiroH1 
+      ? primeiroH1.innerText.trim() 
+      : document.title || 'documento';
+    
+    document.title = nomePDF;
+    
+    // 3. Remove qualquer classe/estilo que possa causar página extra
+    //    (nada específico, só garantia)
+    
+    // 4. Dispara a impressão com todas as regras CSS aplicadas
+    window.print();
+    
+    // 5. Restaura o título original (opcional, mas educado)
+    setTimeout(() => {
+      document.title = tituloOriginal;
+    }, 100);
+  }
 </script>
