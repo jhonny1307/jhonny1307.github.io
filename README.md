@@ -1,6 +1,6 @@
 # Currículo
 
-- teste 2
+- teste 3
 
 ### Informações Pessoais
 
@@ -28,18 +28,13 @@ Estudante interessado em tecnologia, programação e criação de projetos digit
 - Aprendizado prático de programação e lógica computacional
 - Exploração de ferramentas digitais e criação de conteúdo
 
-<button onclick="gerarPDF()">📄 Baixar PDF</button>
-
-<div id="pdf-content">
-  <!-- README renderizado aqui -->
-</div>
+<button onclick="gerarPDFRelativo(this)">📄 Baixar PDF</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-async function gerarPDF() {
+async function gerarPDFRelativo(botao) {
 
   const { jsPDF } = window.jspdf;
 
@@ -53,16 +48,25 @@ async function gerarPDF() {
 
   let y = 10;
 
-  function novaPaginaSePreciso(alturaExtra = 10){
-    if(y + alturaExtra > pageHeight - 10){
+  function novaPaginaSePreciso(altura = 10){
+    if(y + altura > pageHeight - 10){
       pdf.addPage();
       y = 10;
     }
   }
 
-  const root = document.getElementById("pdf-content");
+  // Pega o container pai
+  const parent = botao.parentElement;
 
-  for(const el of root.children){
+  // Pega todos os elementos antes do botão
+  const elementos = [];
+
+  for(const el of parent.children){
+    if(el === botao) break;
+    elementos.push(el);
+  }
+
+  for(const el of elementos){
 
     // HEADERS
     if(/^H[1-6]$/.test(el.tagName)){
@@ -71,45 +75,47 @@ async function gerarPDF() {
       }[el.tagName];
 
       pdf.setFontSize(tamanho);
-      novaPaginaSePreciso(10);
 
       const linhas = pdf.splitTextToSize(el.innerText, pageWidth - 20);
+      novaPaginaSePreciso(linhas.length * 6);
+
       pdf.text(linhas, 10, y);
-      y += linhas.length * (tamanho * 0.35) + 4;
+      y += linhas.length * 6 + 4;
     }
 
-    // PARÁGRAFOS
+    // PARÁGRAFO
     else if(el.tagName === "P"){
       pdf.setFontSize(12);
 
       const linhas = pdf.splitTextToSize(el.innerText, pageWidth - 20);
-
       novaPaginaSePreciso(linhas.length * 5);
 
       pdf.text(linhas, 10, y);
       y += linhas.length * 5 + 4;
     }
 
-    // LISTAS
+    // LISTA
     else if(el.tagName === "UL" || el.tagName === "OL"){
       pdf.setFontSize(12);
 
       for(const li of el.children){
-        const texto = "• " + li.innerText;
-        const linhas = pdf.splitTextToSize(texto, pageWidth - 20);
-
+        const linhas = pdf.splitTextToSize("• " + li.innerText, pageWidth - 20);
         novaPaginaSePreciso(linhas.length * 5);
 
         pdf.text(linhas, 10, y);
         y += linhas.length * 5 + 2;
       }
-      y += 3;
+      y += 4;
     }
 
-    // IMAGENS (html2canvas só aqui, como você quer)
+    // IMAGEM (único lugar que usa html2canvas)
     else if(el.tagName === "IMG"){
 
-      const canvas = await html2canvas(el, { useCORS:true, scale:2 });
+      const canvas = await html2canvas(el, {
+        useCORS:true,
+        scale:2
+      });
+
       const imgData = canvas.toDataURL("image/png");
 
       const imgWidth = pageWidth - 20;
@@ -118,8 +124,7 @@ async function gerarPDF() {
       novaPaginaSePreciso(imgHeight);
 
       pdf.addImage(imgData, "PNG", 10, y, imgWidth, imgHeight);
-
-      y += imgHeight + 5;
+      y += imgHeight + 6;
     }
 
   }
