@@ -22,11 +22,12 @@ Estudante interessado em tecnologia, programação e criação de projetos digit
 ### Experiências
 
 **Projetos pessoais em tecnologia**
-• Desenvolvimento e testes de projetos próprios
-• Aprendizado prático de programação e lógica computacional
-• Exploração de ferramentas digitais e criação de conteúdo
+- Desenvolvimento e testes de projetos próprios
+- Aprendizado prático de programação e lógica computacional
+- Exploração de ferramentas digitais e criação de conteúdo
 
-<!-- html2pdf CDN -->
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <button onclick="baixarPDF()" style="
