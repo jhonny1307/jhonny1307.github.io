@@ -46,7 +46,7 @@ Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão
                  border: none; border-radius: 50px; font-size: 18px; cursor: pointer; 
                  box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s;"
           class="no-print"
-          onmouseover="this.style.backgroundColor='#808080'"
+          onmouseover="this.style.backgroundColor='#4d4d4d'"
           onmouseout="this.style.backgroundColor='#000000'">
     Download PDF
   </button>
