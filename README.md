@@ -3,11 +3,17 @@
 Todos os meus projetos em um só lugar, em caso de repositorios dedicados o README.md tanto se encontra aqui quanto no repositorio dedicado, e aqui você encontrará um link te redirecionando ao repositorio escolhido
 
 ## Índice
-- [md2pdf](https://jhonny1307.github.io/#md2pdf)
+- [Curso](https://jhonny1307.github.io/curso-de-programação-para-celular)
+- [MD2PDF](https://jhonny1307.github.io/#md2pdf)
 
-## md2pdf
+## Curso de programação para celular
 
-Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão (ele mesmo) e funciona totalmente client-side, utilizando a função ```window.print()``` como visivel a seguir (caso esteja visualizando pelo site)
+- Em Andamento!
+
+## MD2PDF
+
+Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão (ele mesmo) e funciona totalmente client-side, utilizando a função ```window.print()``` como visivel a seguir (caso esteja visualizando pelo site), você pode clicar nele e baixar o pdf deste projeto junto dos outros que aqui se encontram sem demais problemas!
+- Uso recomendado para ```Github Pages```
 
 <style>
   @media print {
@@ -40,8 +46,8 @@ Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão
                  border: none; border-radius: 50px; font-size: 18px; cursor: pointer; 
                  box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s;"
           class="no-print"
-          onmouseover="this.style.backgroundColor='#B71C1C'"
-          onmouseout="this.style.backgroundColor='#D32F2F'">
+          onmouseover="this.style.backgroundColor='#050505'"
+          onmouseout="this.style.backgroundColor='#000000'">
     Download PDF
   </button>
 </div>
