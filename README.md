@@ -28,52 +28,17 @@ Estudante interessado em tecnologia, programação e criação de projetos digit
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<button onclick="baixarPDF()" style="
-padding:10px 16px;
-background:#24292e;
-color:white;
-border:none;
-border-radius:6px;
-cursor:pointer;
-font-weight:bold;
-">
+<button onclick="
+    if (typeof html2pdf !== 'undefined') {
+        html2pdf().from(document.body).save();
+    } else {
+        var script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        script.onload = function() {
+            html2pdf().from(document.body).save();
+        };
+        document.head.appendChild(script);
+    }
+" style="background: #2ea44f; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 16px; cursor: pointer;">
 📄 Baixar PDF
 </button>
-
-<script>
-function baixarPDF() {
-
-    // tenta pegar só conteúdo principal
-    let element =
-        document.querySelector("main") ||
-        document.querySelector("article") ||
-        document.body;
-
-    // força remover margens estranhas
-    element.style.marginTop = "0px";
-    element.style.paddingTop = "0px";
-
-    html2pdf().set({
-        margin: [5,5,5,5],
-        filename: "README.pdf",
-        pagebreak: { mode: ["css", "legacy"] },
-
-        image: { type: "jpeg", quality: 1 },
-
-        html2canvas: {
-            scale: 3,
-            scrollY: 0,
-            useCORS: true
-        },
-
-        jsPDF: {
-            unit: "mm",
-            format: "a4",
-            orientation: "portrait"
-        }
-
-    }).from(element).save();
-}
-</script>
