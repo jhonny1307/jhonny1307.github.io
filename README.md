@@ -5,7 +5,7 @@ Todos os meus projetos em um só lugar, em caso de repositorios dedicados o READ
 ## Índice
 - [md2pdf](https://jhonny1307.github.io/#md2pdf)
 
-### md2pdf
+## md2pdf
 
 Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão (ele mesmo) e funciona totalmente client-side, utilizando a função ```window.print()```
 
