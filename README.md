@@ -130,8 +130,6 @@ Caso deseje usar este botão em seus projetos, o codigo dele pode ser visto abai
 
 <script>
   //page config
-  // mudar idioma
-  document.documentElement.lang = "pt-BR";
   // mudar favicon
   let link = document.createElement("link");
   link.rel = "icon";
