@@ -115,16 +115,16 @@ Historico
 
 |AV|Efeito|
 |-|-|
-|1|Batom|
-|2|Habilidade|
-|3|Atributo|
-|4|Batom|
-|5|Habilidade|
-|6|Atributo|
-|7|Batom|
-|8|Habilidade|
+|1|+1 Slot de Batom|
+|2|Habilidade de Trilha|
+|3|+1 em um Atributo|
+|4|+1 Slot de Batom|
+|5|Habilidade de Trilha|
+|6|+1 em um Atributo|
+|7|+1 Slot de Batom|
+|8|Habilidade de Trilha|
 |...||
-|20|Habilidade|
+|20|Habilidade de Trilha|
 
 - Limite de atributos e pericias
 
