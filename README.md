@@ -1,7 +1,3 @@
-# sRPGAV
-
-Um sistema de rpg moldado para investigação e ação
-
 <style> 
   @media print {
     .no-print, button {
@@ -54,6 +50,11 @@ Um sistema de rpg moldado para investigação e ação
     }, 100);
   }
 </script>
+
+# sRPGAV
+
+Um sistema de rpg moldado para investigação e ação
+
 
 # Ficha
 
@@ -150,6 +151,3 @@ Historico
 |Quase Impossivel|45|
 
 *a DT* **Quase Impossivel** *é usavel apenas com pericia no maximo e bonus na pericia do teste em 10 (maximo de pericia base e maximo de bonus)*
-
-# Sistema
-
