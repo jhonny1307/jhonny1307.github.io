@@ -1,24 +1,8 @@
-[Redes Sociais (linktree)](https://linktr.ee/jhonnylabs)
-- [Github](https://github.com/jhonny1307)
-- [Youtube](https://www.youtube.com/@Jhonny1307)
-- [Instagram](https://www.instagram.com/jhonny_labs/)
-- [Servidor do Discord](https://discord.gg/jffDnssv39)
+# sRPGAV
 
-# Projects!
+Um sistema de rpg moldado para investigação e ação
 
-Todos os meus projetos em um só lugar, em caso de repositorios dedicados o README.md tanto se encontra aqui quanto no repositorio dedicado, e aqui você encontrará um link te redirecionando ao repositorio escolhido
-
-## Índice
-
-- [MD2PDF](https://jhonny1307.github.io/#md2pdf)
-- [Curso de Programação Voltado Para Celular](https://jhonny1307.github.io/#curso-de-programação-voltado-para-celular)
-
-## MD2PDF
-
-Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão (ele mesmo) e funciona totalmente client-side, utilizando a função ```window.print()``` como visivel a seguir (caso esteja visualizando pelo site), você pode clicar nele e baixar o pdf deste projeto junto dos outros que aqui se encontram sem demais problemas!
-- Uso recomendado para ```Github Pages```
-
-<style>
+<style> 
   @media print {
     .no-print, button {
       display: none !important;
@@ -29,11 +13,11 @@ Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão
       padding: 0 !important;
     }
     
-    h1, h2 {
+    h1 {
       page-break-before: always;
     }
     
-    h1:first-of-type, h2:first-of-type {
+    h1:first-of-type {
       page-break-before: avoid;
     }
     
@@ -71,73 +55,101 @@ Adiciona um botão a pagina que transforma toda a pagina em pdf, ignora o botão
   }
 </script>
 
-Caso deseje usar este botão em seus projetos, o codigo dele pode ser visto abaixo, basta copiar e colar no arquivo markdown desejado para gerar o botão na posição que o colocou.
+# Ficha
 
-```html
-<style>
-  @media print {
-    .no-print, button {
-      display: none !important;
-    }
-    
-    html, body {
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    
-    h1, h2 {
-      page-break-before: always;
-    }
-    
-    h1:first-of-type, h2:first-of-type {
-      page-break-before: avoid;
-    }
-    
-    body {
-      margin: 1.5cm !important;
-    }
-  }
-</style>
+## Info
 
-<div style="text-align: center; margin: 20px 0;">
-  <button onclick="gerarPDFPerfeito()" 
-          style="background-color: #000000; color: white; padding: 14px 28px; 
-                 border: none; border-radius: 50px; font-size: 18px; cursor: pointer; 
-                 box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s;"
-          class="no-print"
-          onmouseover="this.style.backgroundColor='#333333'"
-          onmouseout="this.style.backgroundColor='#000000'">
-    Download PDF
-  </button>
-</div>
+Nome\
+Jogador\
+AV\
+Trilha\
+Antecedente
 
-<script>
-  function gerarPDFPerfeito() {
-    const tituloOriginal = document.title;
-    const primeiroH1 = document.querySelector('h1');
-    const nomePDF = primeiroH1 
-      ? primeiroH1.innerText.trim() 
-      : document.title || 'documento';
-    document.title = nomePDF;
-    window.print();
-    
-    setTimeout(() => {
-      document.title = tituloOriginal;
-    }, 100);
-  }
-</script>
-```
+Aparencia\
+Personalidade\
+Historico
 
-<script>
-  //page config
-  // mudar favicon
-  let link = document.createElement("link");
-  link.rel = "icon";
-  link.type = "image/png";
-  link.href = "icon.png";
-  document.head.appendChild(link);
-</script>
+## Atributos (teste: pass, (atributo)d20[apenas maior] >= DT(x))
 
-## Curso de Programação Voltado Para Celular
+(FOR) Força\
+(AGI) Agilidade\
+(INT) Intelecto\
+(VIG) Vigor\
+(PRE) Presença
+- (HP) Vida 
+- (CA) Defesa
+	- (EV) Evasão 
+	- (BL) Bloqueio 
+- (VL) Volume 
+- (FL) Carga 
+- (SAN) Sanidade 
+- (RIP) Caido 
 
-- Em Andamento, Aguarde! [Playlist (Youtube)](https://www.google.com/)
+## Pericias (teste: pass, (atributo)d20[apenas maior]+pericia >= DT(x)) 
+
+|| Pericia | Valor | Bonus |
+|-|-|-|-|
+|agi| Acrobacia |  |  |
+|for| Atletismo |  |  |
+|int| Conhecimento |  |  |
+|agi| Crimes |  |  |
+|pre| Enganação |  |  |
+|agi| Furtividade |  |  |
+|pre| Intimidação |  |  |
+|int| Investigação |  |  |
+|for| Luta |  |  |
+|int| Medicina |  |  |
+|int| Ocultismo |  |  |
+|agi| Percepção |  |  |
+|int| Pilotar |  |  |
+|agi| Pontaria |  |  |
+|pre| Persuasão |  |  |
+|int| Profissão |  |  |
+|vig| Sobrevivência |  |  |
+|int| Tecnologia |  |  |
+
+## Tabelas importantes
+
+- Subindo de Nivel
+
+|AV|Efeito|
+|-|-|
+|1|Batom|
+|2|Habilidade|
+|3|Atributo|
+|4|Batom|
+|5|Habilidade|
+|6|Atributo|
+|7|Batom|
+|8|Habilidade|
+|...||
+|20|Habilidade|
+
+- Limite de atributos e pericias
+
+||Max: Valor|Max: Bonus|Minimo|
+|-|-|-|-|
+|Atributos|5|3|0|
+|Pericias|15|10|0|
+
+|Min:|Valor|
+|-|-|
+|Atributos|0|
+|Pericias|0|
+
+- Dificuldades de Testes (DTs)
+
+|Dificuldade|DT|
+|-|-|
+|Irrelevante|5|
+|Muito fácil|10|
+|Facil|15|
+|Medio|20|
+|Dificil|30|
+|Insana|35|
+|Quase Impossivel|45|
+
+*a DT* **Quase Impossivel** *é usavel apenas com pericia no maximo e bonus na pericia do teste em 10 (maximo de pericia base e maximo de bonus)*
+
+# Sistema
+
