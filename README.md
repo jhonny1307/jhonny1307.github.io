@@ -82,7 +82,7 @@ Historico
 	- (EV) Evasão 
 	- (BL) Bloqueio 
 - (VL) Volume 
-- (FL) Carga 
+- (PA) Pontos de Areia
 - (SAN) Sanidade 
 - (RIP) Caido 
 
