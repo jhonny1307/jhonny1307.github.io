@@ -1,5 +1,5 @@
 ## in work progress
-- Última atualização: **09/03/2026**
+- Última atualização: **17/03/2026**
 
 <style> 
   @media print {
@@ -81,8 +81,7 @@ Historico
 (VIG) Vigor\
 (PRE) Presença
 - (HP) Vida 
-- (CA) Defesa
-	- (EV) Evasão 
+- (CA) Defesa 
 	- (BL) Bloqueio 
 - (VL) Volume 
 - (PA) Pontos de Areia
