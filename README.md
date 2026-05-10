@@ -153,3 +153,13 @@ Historico
 |Quase Impossivel|45|
 
 *a DT* **Quase Impossivel** *é usavel apenas com pericia no maximo e bonus na pericia do teste em 10 (maximo de pericia base e maximo de bonus)*
+
+# cartas
+
+| n° | content | = |
+| ---: | :--- | ---: |
+| 1° | a qualquer momento o jogador que te entregou essa prenda pode falar `congela' e você deve ficar parado nessa posição, caso se mova, pegue outra prenda | =
+=
+=
+=
+= |
