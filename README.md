@@ -1,57 +1,114 @@
 ## in work progress
 - Última atualização: **17/03/2026**
 
-<style> 
-  @media print {
-    .no-print, button {
-      display: none !important;
-    }
-    
-    html, body {
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    
-    h1 {
-      page-break-before: always;
-    }
-    
-    h1:first-of-type {
-      page-break-before: avoid;
-    }
-    
-    body {
-      margin: 1.5cm !important;
-    }
-  }
-</style>
-
-<div style="text-align: center; margin: 20px 0;">
-  <button onclick="gerarPDFPerfeito()" 
-          style="background-color: #000000; color: white; padding: 14px 28px; 
-                 border: none; border-radius: 50px; font-size: 18px; cursor: pointer; 
-                 box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: 0.2s;"
-          class="no-print"
-          onmouseover="this.style.backgroundColor='#333333'"
-          onmouseout="this.style.backgroundColor='#000000'">
-    Download em PDF
-  </button>
-</div>
-
 <script>
-  function gerarPDFPerfeito() {
+(function () {
+
+  function gerarPDFDaSecao(h1) {
+
+    // Guarda o conteúdo original da página.
+    // Porque humanos adoram destruir o DOM temporariamente e depois fingir que nada aconteceu.
+    const bodyOriginal = document.body.innerHTML;
     const tituloOriginal = document.title;
-    const primeiroH1 = document.querySelector('h1');
-    const nomePDF = primeiroH1 
-      ? primeiroH1.innerText.trim() 
-      : document.title || 'documento';
-    document.title = nomePDF;
+
+    // Cria container da seção
+    const container = document.createElement("div");
+
+    // Clona o H1 atual
+    container.appendChild(h1.cloneNode(true));
+
+    // Pega tudo até o próximo H1
+    let atual = h1.nextElementSibling;
+
+    while (atual && atual.tagName !== "H1") {
+      container.appendChild(atual.cloneNode(true));
+      atual = atual.nextElementSibling;
+    }
+
+    // Estilo de impressão
+    const estilo = document.createElement("style");
+    estilo.innerHTML = `
+      @media print {
+        body {
+          margin: 1.5cm;
+          font-family: sans-serif;
+        }
+
+        button {
+          display: none !important;
+        }
+      }
+    `;
+
+    // Define título do PDF
+    document.title = h1.innerText.trim() || "documento";
+
+    // Substitui página temporariamente
+    document.body.innerHTML = "";
+    document.head.appendChild(estilo);
+    document.body.appendChild(container);
+
+    // Imprime
     window.print();
-    
+
+    // Restaura página
     setTimeout(() => {
+      document.body.innerHTML = bodyOriginal;
       document.title = tituloOriginal;
+
+      // Recria os botões depois de restaurar
+      adicionarBotoes();
+
     }, 100);
   }
+
+  function adicionarBotoes() {
+
+    const h1s = document.querySelectorAll("h1");
+
+    h1s.forEach((h1) => {
+
+      // Evita duplicar botão
+      if (h1.nextElementSibling?.classList?.contains("pdf-section-button")) {
+        return;
+      }
+
+      const botao = document.createElement("button");
+
+      botao.innerText = "📄 Baixar esta seção";
+      botao.className = "pdf-section-button";
+
+      botao.style.cssText = `
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 999px;
+        cursor: pointer;
+        margin: 10px 0 25px 0;
+        font-size: 15px;
+        transition: 0.2s;
+        display: block;
+      `;
+
+      botao.onmouseover = () => {
+        botao.style.backgroundColor = "#333";
+      };
+
+      botao.onmouseout = () => {
+        botao.style.backgroundColor = "black";
+      };
+
+      botao.onclick = () => gerarPDFDaSecao(h1);
+
+      h1.insertAdjacentElement("afterend", botao);
+    });
+  }
+
+  // Inicializa
+  adicionarBotoes();
+
+})();
 </script>
 
 # sRPGAV
