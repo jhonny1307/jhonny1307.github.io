@@ -4,109 +4,112 @@
 <script>
 (function () {
 
-  function gerarPDFDaSecao(h1) {
-
-    // Guarda o conteúdo original da página.
-    // Porque humanos adoram destruir o DOM temporariamente e depois fingir que nada aconteceu.
-    const bodyOriginal = document.body.innerHTML;
-    const tituloOriginal = document.title;
-
-    // Cria container da seção
-    const container = document.createElement("div");
-
-    // Clona o H1 atual
-    container.appendChild(h1.cloneNode(true));
-
-    // Pega tudo até o próximo H1
-    let atual = h1.nextElementSibling;
-
-    while (atual && atual.tagName !== "H1") {
-      container.appendChild(atual.cloneNode(true));
-      atual = atual.nextElementSibling;
-    }
-
-    // Estilo de impressão
-    const estilo = document.createElement("style");
-    estilo.innerHTML = `
-      @media print {
-        body {
-          margin: 1.5cm;
-          font-family: sans-serif;
-        }
-
-        button {
-          display: none !important;
-        }
-      }
-    `;
-
-    // Define título do PDF
-    document.title = h1.innerText.trim() || "documento";
-
-    // Substitui página temporariamente
-    document.body.innerHTML = "";
-    document.head.appendChild(estilo);
-    document.body.appendChild(container);
-
-    // Imprime
-    window.print();
-
-    // Restaura página
-    setTimeout(() => {
-      document.body.innerHTML = bodyOriginal;
-      document.title = tituloOriginal;
-
-      // Recria os botões depois de restaurar
-      adicionarBotoes();
-
-    }, 100);
-  }
-
-  function adicionarBotoes() {
+  function criarBotoesPDF() {
 
     const h1s = document.querySelectorAll("h1");
 
-    h1s.forEach((h1) => {
-
-      // Evita duplicar botão
-      if (h1.nextElementSibling?.classList?.contains("pdf-section-button")) {
-        return;
-      }
+    h1s.forEach((h1, index) => {
 
       const botao = document.createElement("button");
 
-      botao.innerText = "📄 Baixar esta seção";
-      botao.className = "pdf-section-button";
+      botao.innerText = "Baixar seção em PDF";
 
       botao.style.cssText = `
-        background-color: black;
+        background: #000;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 10px 18px;
         border-radius: 999px;
         cursor: pointer;
         margin: 10px 0 25px 0;
-        font-size: 15px;
+        font-size: 14px;
         transition: 0.2s;
-        display: block;
       `;
 
       botao.onmouseover = () => {
-        botao.style.backgroundColor = "#333";
+        botao.style.background = "#333";
       };
 
       botao.onmouseout = () => {
-        botao.style.backgroundColor = "black";
+        botao.style.background = "#000";
       };
 
-      botao.onclick = () => gerarPDFDaSecao(h1);
+      botao.onclick = () => {
+        gerarPDFDaSecao(h1, index);
+      };
 
       h1.insertAdjacentElement("afterend", botao);
     });
   }
 
-  // Inicializa
-  adicionarBotoes();
+  function gerarPDFDaSecao(h1Atual, indexAtual) {
+
+    const h1s = [...document.querySelectorAll("h1")];
+    const proximoH1 = h1s[indexAtual + 1];
+
+    const container = document.createElement("div");
+
+    container.style.padding = "1.5cm";
+    container.style.background = "white";
+
+    let elemento = h1Atual;
+
+    while (elemento && elemento !== proximoH1) {
+
+      container.appendChild(elemento.cloneNode(true));
+
+      elemento = elemento.nextElementSibling;
+    }
+
+    const janela = window.open("", "_blank");
+
+    const titulo = h1Atual.innerText.trim() || "documento";
+
+    janela.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>${titulo}</title>
+
+        <style>
+          body {
+            margin: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+          }
+
+          button {
+            display: none !important;
+          }
+
+          @media print {
+            body {
+              margin: 0;
+            }
+          }
+        </style>
+      </head>
+
+      <body>
+        ${container.innerHTML}
+
+        <script>
+          window.onload = () => {
+            window.print();
+
+            setTimeout(() => {
+              window.close();
+            }, 300);
+          };
+        <\/script>
+      </body>
+      </html>
+    `);
+
+    janela.document.close();
+  }
+
+  document.addEventListener("DOMContentLoaded", criarBotoesPDF);
 
 })();
 </script>
