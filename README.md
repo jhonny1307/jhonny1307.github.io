@@ -2,116 +2,38 @@
 - Última atualização: **17/03/2026**
 
 <script>
-(function () {
+document.querySelectorAll("h1").forEach((h1, i, arr) => {
 
-  function criarBotoesPDF() {
+  const b = document.createElement("button");
+  b.textContent = "PDF";
 
-    const h1s = document.querySelectorAll("h1");
+  b.onclick = () => {
 
-    h1s.forEach((h1, index) => {
+    const next = arr[i + 1];
+    let html = h1.outerHTML;
+    let el = h1.nextElementSibling;
 
-      const botao = document.createElement("button");
-
-      botao.innerText = "Baixar seção em PDF";
-
-      botao.style.cssText = `
-        background: #000;
-        color: white;
-        border: none;
-        padding: 10px 18px;
-        border-radius: 999px;
-        cursor: pointer;
-        margin: 10px 0 25px 0;
-        font-size: 14px;
-        transition: 0.2s;
-      `;
-
-      botao.onmouseover = () => {
-        botao.style.background = "#333";
-      };
-
-      botao.onmouseout = () => {
-        botao.style.background = "#000";
-      };
-
-      botao.onclick = () => {
-        gerarPDFDaSecao(h1, index);
-      };
-
-      h1.insertAdjacentElement("afterend", botao);
-    });
-  }
-
-  function gerarPDFDaSecao(h1Atual, indexAtual) {
-
-    const h1s = [...document.querySelectorAll("h1")];
-    const proximoH1 = h1s[indexAtual + 1];
-
-    const container = document.createElement("div");
-
-    container.style.padding = "1.5cm";
-    container.style.background = "white";
-
-    let elemento = h1Atual;
-
-    while (elemento && elemento !== proximoH1) {
-
-      container.appendChild(elemento.cloneNode(true));
-
-      elemento = elemento.nextElementSibling;
+    while (el && el !== next) {
+      html += el.outerHTML;
+      el = el.nextElementSibling;
     }
 
-    const janela = window.open("", "_blank");
+    const w = open("", "_blank");
 
-    const titulo = h1Atual.innerText.trim() || "documento";
-
-    janela.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>${titulo}</title>
-
-        <style>
-          body {
-            margin: 0;
-            background: white;
-            font-family: Arial, sans-serif;
-          }
-
-          button {
-            display: none !important;
-          }
-
-          @media print {
-            body {
-              margin: 0;
-            }
-          }
-        </style>
-      </head>
-
-      <body>
-        ${container.innerHTML}
-
-        <script>
-          window.onload = () => {
-            window.print();
-
-            setTimeout(() => {
-              window.close();
-            }, 300);
-          };
-        <\/script>
-      </body>
-      </html>
+    w.document.write(`
+      <title>${h1.innerText}</title>
+      ${html}
+      <script>
+        print();
+        setTimeout(close, 100);
+      <\/script>
     `);
 
-    janela.document.close();
-  }
+    w.document.close();
+  };
 
-  document.addEventListener("DOMContentLoaded", criarBotoesPDF);
-
-})();
+  h1.after(b);
+});
 </script>
 
 # sRPGAV
