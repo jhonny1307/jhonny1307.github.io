@@ -1,41 +1,6 @@
 ## in work progress
 - Última atualização: **17/03/2026**
 
-<script>
-document.querySelectorAll("h1").forEach((h1, i, arr) => {
-
-  const b = document.createElement("button");
-  b.textContent = "PDF";
-
-  b.onclick = () => {
-
-    const next = arr[i + 1];
-    let html = h1.outerHTML;
-    let el = h1.nextElementSibling;
-
-    while (el && el !== next) {
-      html += el.outerHTML;
-      el = el.nextElementSibling;
-    }
-
-    const w = open("", "_blank");
-
-    w.document.write(`
-      <title>${h1.innerText}</title>
-      ${html}
-      <script>
-        print();
-        setTimeout(close, 100);
-      <\/script>
-    `);
-
-    w.document.close();
-  };
-
-  h1.after(b);
-});
-</script>
-
 # sRPGAV
 
 Um sistema de rpg moldado para investigação e ação
